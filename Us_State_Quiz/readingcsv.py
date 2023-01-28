@@ -22,13 +22,7 @@ class ProcessData:
             t.goto(int(row_value.x), int(row_value.y))
             t.write(row_value.state.item())
 
-    # List of states which were unable to guess by user
-    def unable_guess(self, guess_state):
-        missing_state = []
-        for state in self.data.state:
-            if state not in guess_state:
-                missing_state.append(state)
+        # List of states which were unable to guess by user
+        missing_state = [state for state in self.state_name_list if state not in guess_state]
         new_data = pd.DataFrame(missing_state)
-        new_data.to_csv("missing_state_to_learn")
-
-
+        new_data.to_csv("missing_state.csv")
